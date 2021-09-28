@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, unnecessary_new
-
 import 'dart:math';
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
@@ -39,12 +37,12 @@ class _RandomWordsState extends State<RandomWords> {
   Widget _buildSuggestions() {
     return ListView.builder(
         padding: const EdgeInsets.all(16.0),
-        itemBuilder: /*1*/ (context, i) {
-          if (i.isOdd) return const Divider(); /*2*/
+        itemBuilder: (context, i) {
+          if (i.isOdd) return const Divider(); 
 
-          final index = i ~/ 2; /*3*/
+          final index = i ~/ 2; 
           if (index >= _suggestions.length) {
-            _suggestions.addAll(generateWordPairs().take(10)); /*4*/
+            _suggestions.addAll(generateWordPairs().take(10)); 
           }
           return _buildRow(_suggestions[index]);
         });
@@ -78,30 +76,30 @@ class _RandomWordsState extends State<RandomWords> {
         title: const Text('Neverending story: flutter edition'),
       ),
       body: _buildSuggestions(),
-      floatingActionButton: new FloatingActionButton(
+      floatingActionButton: FloatingActionButton(
           tooltip: 'Add',
-          child: new Icon(Icons.cake_outlined),
+          child: Icon(Icons.cake_outlined),
           onPressed: () {
             showDialog(
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
                   title: const Text("Nice!"),
-                  content: new Text("You've been rewarded with a punchline. Click the button to claim your prize"),
+                  content: Text("You've been rewarded with a punchline. Click the button to claim your prize"),
                   actions: <Widget>[
-                    new TextButton(
-                      child: new Text("CLAIM"),
+                     TextButton(
+                      child: Text("CLAIM"),
                       onPressed: () {
                         var snackBar = SnackBar(content: Text(punchLines[Random().nextInt(punchLines.length)]));
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         Navigator.of(context).pop();
-                      },
-                    ),
-                  ],
-                );
-              },
-            );
-          }),
+                   },
+                 ),
+               ],
+             );
+           },
+         );
+      }),
     );
   }
 }
